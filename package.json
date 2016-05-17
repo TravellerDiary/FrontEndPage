@@ -1,0 +1,24 @@
+{
+  "name": "traveller-diary-frontebdpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TravellerDiary/FrontEndPage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TravellerDiary/FrontEndPage/issues"
+  },
+  "homepage": "https://github.com/TravellerDiary/FrontEndPage#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.1",
+    "jquery": "^2.2.3"
+  }
+}
