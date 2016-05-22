@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,19 +10,28 @@
   <meta name="author" content="">
 
   <title>TD 個人旅遊集</title>
+
+  <title>TD 個人旅遊集</title>
   <!-- Bootstrap Core CSS -->
   <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="./css/stylish-portfolio.css" rel="stylesheet">
+
   <!-- Custom Fonts -->
   <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="./css/index.css">
+
 </head>
+
 
 <body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
+
         <!--漢堡包包起來的東西-->
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -72,54 +83,88 @@
           </li>
         </ul>
 
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
   </nav>
 
-  <!-- About -->
-  <section id="about" class="about">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading">
-            <span>個人旅遊集</span>
-            <input type="text" placeholder="add a new diary" id="showproject"/>
-            <button type="button" class="btn btn-default dropdown-toggle" >
-              <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
-            </button>
-          </div>
-          <!-- List group -->
-          <ul class="list-group" id="project-list">
-            <li class="list-group-item">
-              <a href="cabinetin.html">
-                <img src="img/t1.jpg" width="50" height="50">
-                <span>test</span>
-              </a>
-              <div class="btn-group config-button">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+  <section id="project" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+              <span>個人旅遊集</span>
+              <span id="project-controls">
+                <button type="button" id="sort-button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-sort" aria-hidden="true" style="color: gray;"></span>
                 </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">編輯旅遊集</a></li>
-                  <li role="separator" class="divider"></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-project-modal">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: gray;"></span>
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="add-project-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">新增旅遊集</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div>標題：<input type="text" name="title"></div>
+                        <div>開始日期：<input type="text" name="startDate" placeholder="YYYY-MM-DD"></div>
+                        <div>結束日期：<input type="text" name="endDate" placeholder="YYYY-MM-DD"></div>
+                        <div>縮圖：<input type="text" name="picture"></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                        <button id="submit-create-button" type="button" class="btn btn-primary">新增</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+
+            </div>
+            <ul class="list-group" id="project-list"></ul>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </section>
+  <div class="modal fade" id="edit-project-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel2">編輯旅遊集</h4>
+        </div>
+        <div class="modal-body">
+          <div>標題：<input type="text" name="title"></div>
+          <div>開始日期：<input type="text" name="startDate" placeholder="YYYY-MM-DD"></div>
+          <div>結束日期：<input type="text" name="endDate" placeholder="YYYY-MM-DD"></div>
+          <div>縮圖：<input type="text" name="picture"></div>
+          <input type="hidden" name="pid">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+          <button id="submit-edit-button" type="button" class="btn btn-primary">編輯</button>
         </div>
       </div>
     </div>
-    <!-- /.row -->
   </div>
-  <!-- /.container -->
-</section>
-<!-- jQuery -->
-<script src="./node_modules/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<!--custom JavaScript-->
-<script src="./js/index.js"></script>
+
+  <!-- jQuery -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!--custom JavaScript-->
+  <script src="./js/index.js"></script>
+
 </body>
+
 </html>
