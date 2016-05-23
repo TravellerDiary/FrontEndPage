@@ -33,7 +33,7 @@ $(function() {
       var project_this = projects[key];
       $project_list.append(
         '<li class="list-group-item">'+
-          '<a href="cabinetin.html">'+
+          '<a id="myLink" href="#" onclick="toDiaryPage(`'+project_this.pid+'`);">'+
             '<img src="img/' + project_this.picture+'">'+
             '<span>'+ project_this.title + ' (' + project_this.startDate +' ~ ' + project_this.endDate + ')</span>'+
           '</a>'+
@@ -141,3 +141,24 @@ $(function() {
     });
   });
 });
+
+//==================function================
+function toDiaryPage(projectID){
+    //console.log(projectID);
+
+    $.ajax({
+      url:'/toDiaryPage',
+      type:'post',
+      dataType:'text',
+      data:{pid:projectID},
+      success:function(result){
+        alert(result);
+        window.location.href = '/diarys';
+        //console.log("success");
+      },error:function(err){
+        alert("err");
+      }
+
+    });
+    //window.location.href = '/diary';
+}
