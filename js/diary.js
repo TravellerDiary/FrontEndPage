@@ -1,6 +1,6 @@
 $(function() {
 //尚未把 userid 和 projectid抓出來給 每一個顯示的日記
-//尚未修改  _id  ---> did
+
   $("#menu-close").click(function(e) {
     e.preventDefault();
     $("#sidebar-wrapper").toggleClass("active");
@@ -94,7 +94,7 @@ loadDiarysData();
     $edit_diary_modal.find('input[name="title"]').val(diary_this.title);
     $edit_diary_modal.find('input[name="date"]').val(diary_this.date);
     $edit_diary_modal.find('input[name="picture"]').val(diary_this.picture);
-    $edit_diary_modal.find('input[name="did"]').val(diary_this._id);  // _id 為日記ID 須做更改!
+    $edit_diary_modal.find('input[name="did"]').val(diary_this.did);  // _id 為日記ID 須做更改!
     $edit_diary_modal.modal('show');
   });
 
@@ -120,7 +120,7 @@ loadDiarysData();
   $diary_list.on('click','.delete-button',function(){
     var diary_this = diarys[$(this).data('key')];
     $.ajax({
-      url: '/api/sos987987/5729a1b0d6b0d4dc14b8e459/diarys/'+diary_this._id,  //注意 這裡要修改成 did
+      url: '/api/sos987987/5729a1b0d6b0d4dc14b8e459/diarys/'+diary_this.did,  //注意 這裡要修改成 did
       type: 'delete',
       success: function(data) {
         console.log("ok");
