@@ -1,5 +1,6 @@
 $(function() {
 //尚未把 userid 和 projectid抓出來給 每一個顯示的日記
+//尚未修改  _id  ---> did
   $("#menu-close").click(function(e) {
     e.preventDefault();
     $("#sidebar-wrapper").toggleClass("active");
