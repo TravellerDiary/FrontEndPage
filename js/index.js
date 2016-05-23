@@ -77,7 +77,6 @@ $(function() {
   //新增project
   var $add_project_modal = $('#add-project-modal');
   $('#submit-create-button').click(function(){
-    console.log("123", 123);
     $.ajax({
       url: '/api/sos987987/projects',
       type: 'post',
@@ -152,7 +151,6 @@ function toDiaryPage(projectID){
       dataType:'text',
       data:{pid:projectID},
       success:function(result){
-        alert(result);
         window.location.href = '/diarys';
         //console.log("success");
       },error:function(err){

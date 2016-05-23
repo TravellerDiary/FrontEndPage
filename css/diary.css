@@ -1,0 +1,10 @@
+.config-button{
+  position: absolute;
+  right: 70px;
+  top: 23px;
+}
+
+.list-group-item{
+  position: relative;
+  height: 80px;
+}
