@@ -151,6 +151,7 @@ function toDiaryPage(projectID){
       dataType:'text',
       data:{pid:projectID},
       success:function(result){
+
         window.location.href = '/diarys';
         //console.log("success");
       },error:function(err){

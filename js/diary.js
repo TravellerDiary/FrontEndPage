@@ -54,23 +54,40 @@ $(function() {
   //var loadProjectsData = function(){
   var loadDiarysData = function(){
     //取得project id
-    $.ajax({
-      url: '/api/sos987987/5729a1b0d6b0d4dc14b8e459/diarys',
-      type: 'get',
-      dataType: 'json',
-      success: function(data){
-        diarys = data;
-        renderDiarys();
-      }
-    });
+    var url = '/api/sos987987/'+ current_projectID + '/diarys';
+     $.ajax({
+       url: url,
+       type: 'get',
+       dataType: 'json',
+       success: function(data){
+         diarys = data;
+         renderDiarys();
+       }
+     });
   };
-loadDiarysData();
-  //新增project
+
+  var loadProjectID = function(){
+      $.ajax({
+         url:'/getProjectID',
+         type:'post',
+         dataType:'text',
+         success: function(projectID){
+             //alert("tfdkjksfdlj");
+             current_projectID = projectID;
+             loadDiarysData();
+        }
+     });
+  };
+
+loadProjectID();  //頁面載入時只要作一次該函式就好
+
+  //新增diary
   //var $add_project_modal = $('#add-project-modal');
-  var $add_diary_modal = $('#add-diary-modal')
+  var $add_diary_modal = $('#add-diary-modal');
   $('#submit-create-button').click(function(){
+    var url = '/api/sos987987/'+ current_projectID +'/diarys';
     $.ajax({
-      url: '/api/sos987987/5729a1b0d6b0d4dc14b8e459/diarys',
+      url: url,
       type: 'post',
       data: {
         title: $add_diary_modal.find('input[name="title"]').val(),
@@ -99,9 +116,9 @@ loadDiarysData();
   });
 
   $('#submit-edit-button').click(function(){
-    console.log("123", 123);
+    var url = '/api/sos987987/'+ current_projectID +'/diarys/'+$edit_diary_modal.find('input[name="did"]').val();
     $.ajax({
-      url: '/api/sos987987/5729a1b0d6b0d4dc14b8e459/diarys/'+$edit_diary_modal.find('input[name="did"]').val(),
+      url: url,
       type: 'put',
       data: {
         title: $edit_diary_modal.find('input[name="title"]').val(),
@@ -119,8 +136,9 @@ loadDiarysData();
   //刪除project
   $diary_list.on('click','.delete-button',function(){
     var diary_this = diarys[$(this).data('key')];
+    var url = '/api/sos987987/'+ current_projectID +'/diarys/'+diary_this.did;
     $.ajax({
-      url: '/api/sos987987/5729a1b0d6b0d4dc14b8e459/diarys/'+diary_this.did,  //注意 這裡要修改成 did
+      url: url,  //注意 這裡要修改成 did
       type: 'delete',
       success: function(data) {
         console.log("ok");
