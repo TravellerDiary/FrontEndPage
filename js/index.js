@@ -161,3 +161,7 @@ function toDiaryPage(projectID){
     });
     //window.location.href = '/diary';
 }
+
+function toProjectPage(){
+    window.location.href = '/';
+}

@@ -75,9 +75,23 @@ $(function() {
              //alert("tfdkjksfdlj");
              current_projectID = projectID;
              loadDiarysData();
+             loadProjectName(projectID);
         }
      });
   };
+
+  var loadProjectName = function(projectID){
+    var url = '/api/sos987987/projects/'+projectID;
+
+    $.ajax({
+       url: url,
+       type:'get',
+       dataType:'json',
+       success: function(data){
+          $("#ProjectName").append(data[0].title);
+      }
+   });
+  }
 
 loadProjectID();  //頁面載入時只要作一次該函式就好
 
@@ -167,4 +181,8 @@ function toDiaryContentPage(diaryID){
     //
     // });
     //window.location.href = '/diary';
+}
+
+function toProjectPage(){
+    window.location.href = '/';
 }
