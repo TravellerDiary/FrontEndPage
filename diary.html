@@ -20,7 +20,8 @@
     <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./css/diary.css">
-
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link href="./css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -114,10 +115,43 @@
                                   <h4 class="modal-title" id="myModalLabel">新增日記</h4>
                                 </div>
                                 <div class="modal-body">
-                                  <div>標題：<input type="text" name="title"></div>
-                                  <div>日期：<input type="text" name="date" placeholder="YYYY-MM-DD"></div>
+                                  <form method="post" action="/addQuestionForm" class="form-horizontal" enctype="multipart/form-data" >
+                                      <div class="form-group">
 
-                                  <div>縮圖：<input type="text" name="picture"></div>
+                                            <div>      縮圖(這邊可以用其他方式來取代用 form的post直接傳給後端嗎)<input type="hidden" class="form-control" name="picture"></div>
+
+                                            <!-- <div>日期：<input type="text" name="date" placeholder="YYYY-MM-DD"></div> -->
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">縮圖：</label>
+                                                <div class="col-sm-10">
+                                                    <input id="newDiaryPic" name="picture" class="file" type="file" multiple data-min-file-count="1" name="newDiaryPic">
+                                                </div>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <label for="" class="col-sm-2 control-label"></label>
+                                               <div class="col-sm-8">
+                                                   <input type="text" class="form-control" name="title" placeholder="為日記取個名字!">
+                                               </div>
+                                               <div. class="col-sm-2"></div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <label for="" class="col-sm-4 control-label">日期：</label>
+                                              <div class="col-sm-4">
+                                                <div class='input-group date' id='newdiaryDate'>
+                                                    <input type='text' name="date" class="form-control" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-4"></div>
+                                         </div>
+
+
+
+                                   </form>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
@@ -145,10 +179,12 @@
               <h4 class="modal-title" id="myModalLabel2">編輯旅遊集</h4>
             </div>
             <div class="modal-body">
-              <div>標題：<input type="text" name="title"></div>
-              <div>開始日期：<input type="text" name="startDate" placeholder="YYYY-MM-DD"></div>
-              <div>結束日期：<input type="text" name="endDate" placeholder="YYYY-MM-DD"></div>
+
               <div>縮圖：<input type="text" name="picture"></div>
+
+              <div>標題：<input type="text" name="title"></div>
+              <div>日期：<input type="text" name="date" placeholder="YYYY-MM-DD"></div>
+
               <input type="hidden" name="did">
             </div>
             <div class="modal-footer">
@@ -158,10 +194,17 @@
           </div>
         </div>
       </div>
+
     <!-- jQuery -->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--
+    <script src="./node_modules/bootstrap/js/transition.js"></script>
+    <script src="./node_modules/bootstrap/js/collapse.js"></script>
+    <script src="./node_modules/moment/moment.js"></script> -->
+
+    <script src="./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <!--custom JavaScript-->
     <script src="./js/diary.js"></script>
 
@@ -172,15 +215,38 @@
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
     });
-
     // Opens the sidebar menu
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
     });
 
-    </script>
 
+    </script>
+    <script src="./js/fileinput.js" type="text/javascript"></script>
+
+    <script>
+      $("#newDiaryPic").fileinput({
+        'allowedFileExtensions' : ['jpg', 'png','gif'],
+        'showUpload' : false
+      });
+
+      $(function () {
+          $('#newdiaryDate').datepicker();
+      });
+      // $(".btn-info").on('click', function() {
+      //     $('#file-4').fileinput('refresh', {previewClass:'bg-info'});
+      // });
+
+      // $(document).ready(function() {
+      //     $("#test-upload").fileinput({
+      //         'showPreview' : false,
+      //         'showUpload' : false,
+      //         'allowedFileExtensions' : ['jpg', 'png','gif'],
+      //         'elErrorContainer': '#errorBlock'
+      //     });
+      // });
+    </script>
 </body>
 
 </html>

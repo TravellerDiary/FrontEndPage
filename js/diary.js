@@ -99,6 +99,8 @@ loadProjectID();  //頁面載入時只要作一次該函式就好
   //var $add_project_modal = $('#add-project-modal');
   var $add_diary_modal = $('#add-diary-modal');
   $('#submit-create-button').click(function(){
+    var picture = $add_diary_modal.find('input[name="picture"]').val();
+    alert(picture);
     var url = '/api/sos987987/'+ current_projectID +'/diarys';
     $.ajax({
       url: url,
