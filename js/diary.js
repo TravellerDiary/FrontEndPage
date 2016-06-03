@@ -25,10 +25,12 @@ $(function() {
     for(var key in diarys){
       //var project_this = diarys[key];
       var diary_this = diarys[key];
+      var diary_pic = diary_this.picture;
+  
       $diary_list.append(
         '<li class="list-group-item">'+
           '<a id="myLink" href="#" onclick="toDiaryContentPage(5729a1b0d6b0d4dc14b8e459);">'+  //陳暐海陸哥專案遊的假資料
-            '<img src="img/' + diary_this.picture+'">'+
+            '<img src="'+diary_pic+'" height="50px" width="50px">'+
             '<span>'+ diary_this.title + ' (' + diary_this.date + ')</span>'+
           '</a>'+
           '<div class="btn-group config-button">'+
@@ -98,9 +100,46 @@ loadProjectID();  //頁面載入時只要作一次該函式就好
   //新增diary
   //var $add_project_modal = $('#add-project-modal');
   var $add_diary_modal = $('#add-diary-modal');
+
+  var dfieldPhoto = $('#fieldPhoto');
+  dfieldPhoto.fileupload({
+      dataType: 'json',
+      error: function (xhr) {
+          console.log(xhr);
+      },
+      success: function (response) {
+          console.log(response);
+      }
+      //列出上傳的檔案
+      // done: function(e, data){
+      //     $.each(data.result.files, function(index, file){
+      //         // $('.formContainer').html($('<div class="upload">File uploaded: ' + file.name + '</div>'));
+      //         alert(file.name);
+      //     })
+      // }
+  });
+
+//==============新增日記照片上傳=======================
+  var diaryPic ;
+  var dfieldPhoto = $('#fieldPhoto');
+  dfieldPhoto.fileupload({
+      dataType: 'json',
+      error: function(xhr) {
+          console.log(xhr);
+      },
+      success: function(response) {
+          console.log(response + "success");
+      },
+      done: function(e, data){
+          $.each(data.result.files, function(index, file){
+            //  alert(file.name);
+             diaryPic = file.name;
+          })
+      }
+  });
+
   $('#submit-create-button').click(function(){
-    var picture = $add_diary_modal.find('input[name="picture"]').val();
-    alert(picture);
+
     var url = '/api/sos987987/'+ current_projectID +'/diarys';
     $.ajax({
       url: url,
@@ -108,8 +147,8 @@ loadProjectID();  //頁面載入時只要作一次該函式就好
       data: {
         title: $add_diary_modal.find('input[name="title"]').val(),
         date: $add_diary_modal.find('input[name="date"]').val(),
-        picture: $add_diary_modal.find('input[name="picture"]').val()
-      },
+        picture: "uploads/sos987987/" + diaryPic   //這邊先暫時用sos987987的帳號
+      },    //這邊的picture路靜要注意一下  diary.html再views資料夾裡
       success: function(data) {
         console.log("ok");
         loadDiarysData();
@@ -120,7 +159,7 @@ loadProjectID();  //頁面載入時只要作一次該函式就好
   });
 
 
-  //編輯project
+  //===========編輯project===========================
   var $edit_diary_modal = $('#edit_diary_modal');
   $diary_list.on('click','.edit-button',function(){
     var diary_this = diarys[$(this).data('key')];
